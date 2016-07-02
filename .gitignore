@@ -1,0 +1,4 @@
+*.wav
+*.pyc
+.ipynb_checkpoints\
+*.mp3
