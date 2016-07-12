@@ -60,7 +60,7 @@ class EmotionAnalysis():
 			dataset_labels = []
 			audio_files = [f for f in listdir(path) if isfile(join(path, f))]
 			shuffle(audio_files)
-			for audio_file in audio_files:
+			for audio_file in audio_files[:100]:
 				try:
 					audio_features = self.extractor.extract_features_per_frame(join(path, audio_file))
 					i+=1
@@ -69,21 +69,21 @@ class EmotionAnalysis():
 				except:
 					print "Skipping audio file '"+join(path, audio_file)+"'"
 					continue
-				audio_label = audio_file.split('_')[2].split('.')[0]
-				if audio_label == 'happy' or audio_label == 'ps':
-					audio_label = 'positive'
-				elif audio_label == 'neutral':
-					audio_label = 'neutral'
-					#dataset_inputs.append(audio_features)
-					#dataset_labels.append(audio_label)
-				elif audio_label == 'angry' or audio_label == 'sad':
-					audio_label = 'negative'
-				else:
-					audio_label = -1
+				audio_label = audio_file.split('_')[0]
+				#if audio_label == 'happy' or audio_label == 'ps':
+				#	audio_label = 'positive'
+				#elif audio_label == 'neutral':
+				#	audio_label = 'neutral'
+				#	#dataset_inputs.append(audio_features)
+				#	#dataset_labels.append(audio_label)
+				#elif audio_label == 'angry' or audio_label == 'sad':
+				#	audio_label = 'negative'
+				#else:
+				#	audio_label = -1
 
-				if audio_label != -1:	
-					dataset_inputs.extend(audio_features)
-					dataset_labels.extend([audio_label for _ in range(len(audio_features))])
+				#if audio_label != -1:	
+				dataset_inputs.extend(audio_features)
+				dataset_labels.extend([audio_label for _ in range(len(audio_features))])
 			return [dataset_inputs, dataset_labels]
 
 
