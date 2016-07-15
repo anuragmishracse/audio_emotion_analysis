@@ -26,7 +26,8 @@ for audio_file in audio_files:
 print "\n\n"
 print "Total files: "+str(c_total)
 print "Read files: "+str(c_read)
-print "Skipped files:"+str(c_skipped)       
+print "Skipped files:"+str(c_skipped) 
+print len(segments)      
 
 FORMAT = pyaudio.paInt16
 CHANNELS = 1
@@ -41,7 +42,7 @@ stream = p.open(format = FORMAT,
                 rate = rate_sig,  
                 output = True, frames_per_buffer=rate_sig)  
 #read data
-count_label = 293
+count_label = 293   
 for segment in segments[293:]:
     count_label+=1
     stream.write(segment[0:int(len(segment)/2)])

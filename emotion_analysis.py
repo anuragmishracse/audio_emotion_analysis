@@ -60,7 +60,7 @@ class EmotionAnalysis():
 			dataset_labels = []
 			audio_files = [f for f in listdir(path) if isfile(join(path, f))]
 			shuffle(audio_files)
-			for audio_file in audio_files[:100]:
+			for audio_file in audio_files:
 				try:
 					audio_features = self.extractor.extract_features_per_frame(join(path, audio_file))
 					i+=1
