@@ -3,3 +3,4 @@
 .ipynb_checkpoints
 *.mp3
 *.csv
+*.pkl
