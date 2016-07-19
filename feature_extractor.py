@@ -1,14 +1,16 @@
-# The purpose of this script is to extract the features from an audio file and return the feature set.
-# The features includes both the 13 - MFCC(Mel Frequency Spectral Coefficients) and 26 - Log Filterbank Energy features.
-# An audio file is divided into multiple frames of 25 ms each and the 13 + 26 = 39 features are evaluated for each frame.
-# For each feature, aggregation is done on all frames and six things are evaluated which are:
-# 	1. mean
-# 	2. variance
-# 	3. maximum
-# 	4. minimum
-# 	5. mean of first half frames
-# 	6. mean of second half frames
-# Total number of features returned for an audio input(of any size) are = 6 * (13 + 26) = 234
+'''
+The purpose of this script is to extract the features from an audio file and return the feature set.
+The features includes both the 13 - MFCC(Mel Frequency Spectral Coefficients) and 26 - Log Filterbank Energy features.
+An audio file is divided into multiple frames of 25 ms each and the 13 + 26 = 39 features are evaluated for each frame.
+For each feature, aggregation is done on all frames and six things are evaluated which are:
+	1. mean
+	2. variance
+	3. maximum
+	4. minimum
+	5. mean of first half frames
+	6. mean of second half frames
+Total number of features returned for an audio input(of any size) are = 6 * (13 + 26) = 234
+'''
 import numpy as np
 import scipy.io.wavfile as wav
 from features import mfcc, logfbank
