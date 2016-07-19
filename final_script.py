@@ -29,7 +29,7 @@ else:
 	with open('my_dumped_classifier.pkl', 'wb') as fid:
 	    cPickle.dump(clf, fid)    
 
-row = ['Name', 'Length of call in seconds', 'Overall call result', 'Transition: First half', 'Transition: Second half']
+row = ['Name', 'Length of call', 'Overall call result', 'Transition: First half', 'Transition: Second half']
 writer.writerow(row)
 
 path = 'test_calls'
@@ -47,7 +47,7 @@ for audio_file in audio_files:
 	for i in range(int(math.ceil(len(sig)/(rate_sig*20)))):
 	    segment_result.append(emo.evaluate(clf, audio_signal = (rate_sig, sig[i*rate_sig*20:i*rate_sig*20+rate_sig*20])))
 	row.append(audio_file)
-	row.append(len(sig)/rate_sig)
+	row.append(str(int((len(sig)/rate_sig)/60))+" min "+str(int((len(sig)/rate_sig)%60))+" sec")
 	row.append(complete_call_result)
 	row.append(first_half_result)
 	row.append(second_half_result)
@@ -55,3 +55,4 @@ for audio_file in audio_files:
 	writer.writerow(row)
 	csvfile.flush()
 csvfile.close()
+print "Completed..."

@@ -23,11 +23,14 @@ for audio_file in audio_files:
         continue
     for i in range(int(math.ceil(len(sig)/(rate_sig*20)))):
         segments.append(sig[i*(rate_sig*20):i*(rate_sig*20) + rate_sig*20])
+
+print "-"*50
 print "\n\n"
 print "Total files: "+str(c_total)
 print "Read files: "+str(c_read)
 print "Skipped files:"+str(c_skipped) 
 print "Total 20 sec chunks: "+str(len(segments))
+print "-"*50
 
 FORMAT = pyaudio.paInt16
 CHANNELS = 1
@@ -42,8 +45,8 @@ stream = p.open(format = FORMAT,
                 rate = rate_sig,  
                 output = True, frames_per_buffer=rate_sig)  
 #read data
-count_label = 293   
-for segment in segments[293:]:
+count_label = 0   
+for segment in segments[0:]:
     count_label+=1
     stream.write(segment[0:int(len(segment)/2)])
     stream.write(segment[int(len(segment)/2):])
