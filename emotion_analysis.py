@@ -1,3 +1,11 @@
+'''
+This script implements all the modules that are required for emotion analysis. 
+It contains modules that: 
+1. prepares the dataset
+2. trains a classifier
+3. tests the classifier
+4. can evaluate a audio signal
+'''
 import feature_extractor
 from os import listdir
 from os.path import isfile, join
@@ -9,7 +17,14 @@ class EmotionAnalysis():
 		self.extractor = feature_extractor.FeatureExtractor()
 
 	def write_to_csv(self, inp, label, name):
-		# Used to write the prepared dataset to a csv file
+		'''
+		Writes the prepared dataset to a csv file.
+
+		Parameter description -
+		inp 	:	A list of feature vector
+		label 	:	A list of labels for each feature vector
+		name  	:	csv file-name 
+		'''
 		csvfile = open(name, 'wb')
 		writer = csv.writer(csvfile, delimiter=',')
 		for i in range(len(inp)):
@@ -19,8 +34,16 @@ class EmotionAnalysis():
 		csvfile.close()
 
 	def prepare_dataset(self, path):
-		# This method prepares the dataset from the audio files present in the provided path.
-		# This is for the TESS dataset.
+		'''
+		This method prepares the dataset from the audio files present in the provided path.
+
+		Parameter description -
+		path	:	Path where all the input audio files are stored
+
+		Returns -	[dataset_inputs, dataset_labels]
+		dataset_inputs	:	A list of feature vectors, where each vector is for one complete audio file.
+		dataset_labels	:	A list of labels, where each label is for corresponding feature vector in dataset_inputs.
+		'''
 		i=0
 		dataset_inputs = []
 		dataset_labels = []
@@ -35,25 +58,22 @@ class EmotionAnalysis():
 				print "Skipping audio file '"+join(path, audio_file)+"'"
 				continue
 			audio_label = audio_file.split('_')[0]
-			#if audio_label == 'happy' or audio_label == 'ps':
-			#	audio_label = 'positive'
-			#elif audio_label == 'neutral':
-			#	audio_label = 'neutral'
-				#dataset_inputs.append(audio_features)
-				#dataset_labels.append(audio_label)
-			#elif audio_label == 'angry' or audio_label == 'sad':
-			#	audio_label = 'negative'
-			#else:
-			#	audio_label = -1
-
-			#if audio_label != -1:	
 			dataset_inputs.append(audio_features)
 			dataset_labels.append(audio_label)
 		return [dataset_inputs, dataset_labels]
 
 	def prepare_dataset_per_frame(self, path):
-			# This method prepares the dataset from the audio files present in the provided path.
-			# This is for the TESS dataset.
+			'''
+			-- For future use --
+			This method prepares the dataset 'per frame' from the audio files present in the provided path.
+
+			Parameter description -
+			path	:	Path where all the input audio files are stored
+
+			Returns -	[dataset_inputs, dataset_labels]
+			dataset_inputs	:	A list of feature vectors, where each vector is for one frame in a complete audio file.
+			dataset_labels	:	A list of labels, where each label is for corresponding feature vector in dataset_inputs.
+			'''
 			from random import shuffle
 			i=0
 			dataset_inputs = []
@@ -69,27 +89,26 @@ class EmotionAnalysis():
 				except:
 					print "Skipping audio file '"+join(path, audio_file)+"'"
 					continue
-				audio_label = audio_file.split('_')[0]
-				#if audio_label == 'happy' or audio_label == 'ps':
-				#	audio_label = 'positive'
-				#elif audio_label == 'neutral':
-				#	audio_label = 'neutral'
-				#	#dataset_inputs.append(audio_features)
-				#	#dataset_labels.append(audio_label)
-				#elif audio_label == 'angry' or audio_label == 'sad':
-				#	audio_label = 'negative'
-				#else:
-				#	audio_label = -1
-
-				#if audio_label != -1:	
+				audio_label = audio_file.split('_')[0]	
 				dataset_inputs.extend(audio_features)
 				dataset_labels.extend([audio_label for _ in range(len(audio_features))])
 			return [dataset_inputs, dataset_labels]
 
 
 	def train_classifier(self, dataset):
-		# This is the function which trains a classifier based on the given dataset and returns the trained classifier. 
-		# Currently using a Random Forest classifier, which was giving better accuracy on the test data.
+		'''
+		This is the function which trains a classifier based on the given dataset and returns the trained classifier. 
+		Currently using a Random Forest classifier, which was giving better accuracy on the test data.
+
+		TO DO: Use of better performing classifiers
+
+		Parameter description -
+		dataset 	:	A list of feature vector list and labels list.
+
+		Returns -
+		clf 		:	A trained classifier that can be used for predictions. 	 
+
+		'''
 		from sklearn.ensemble import RandomForestClassifier
 		inp, lab = dataset
 		dataset = zip(inp, lab)
@@ -100,7 +119,18 @@ class EmotionAnalysis():
 		return clf
 
 	def test_classifier(self, classifier, dataset):
-		# This is the function which tests the trained classifier on the test dataset and returns the precision, recall and f1 score.
+		'''
+		This is the function which tests the trained classifier on the test dataset and returns the precision, recall and f1 score.
+
+		Parameter description -
+		classifier	:	A trained classifier that can be used for testing and predictions. 	
+		dataset 	:	A list of feature vector list and labels list.
+
+		Returns - [precision, recall, f1_score]
+		precision 	:	A list of precision values for each class label
+		recall 		:	A list of recall values for each class label
+		f1_score 	:	A list of f1_score values for each class label
+		'''
 		from sklearn.metrics import precision_recall_fscore_support
 		y_pred = classifier.predict(dataset[0])
 		y_true = dataset[1]
@@ -108,7 +138,17 @@ class EmotionAnalysis():
 		return [precision, recall, f1_score]
 
 	def evaluate(self, classifier, audio_file = None, audio_signal = None):
-		# This function predicts the emotion for the audio input from the trained classifier. 
+		'''
+		This function predicts the emotion in the audio signal input using the trained classifier. 
+
+		Parameter description -
+		classifier	:	A trained classifier that can be used for testing and predictions.
+		audio_file 	:	An audio file path to analyse
+		audio_signal: 	An audio signal to analyse
+
+		Returns - 
+		audio_label[0]	:	A label <positve | neutral | negative> for the input audio sample. 
+		'''
 		if audio_file is not None:
 			audio_features = self.extractor.extract_features(audio_file = audio_file)
 		else:

@@ -1,10 +1,9 @@
 '''
-The purpose of this script is to create the dataset for training the 
+The purpose of this script is to create a dataset for training the 
 emotion analysis model. It does the following:
 1. Reads all the audio files placed in a folder, breaks it into chunks of 30 seconds each.
 2. Plays each chunk and inputs user input for the emotion.
-3. Saves the audio chunk as a .wav file with the filename in this format - "<Emotion>.wav"
-
+3. Saves the audio chunk as a .wav file with its filename in this format - "<Emotion>_<count>.wav"
 '''
 from __future__ import division
 import pyaudio
@@ -15,12 +14,12 @@ from os.path import isfile, join
 
 segments = []   # A list of 30 sec segments.   
 
-path = "calls"  # The location where all the audio files are stored.
+path = "calls"  # The location where all the audio files are initially stored.
 c_total = 0
 c_read = 0
 c_skipped = 0
 '''
-Reads each audio file, breaks it into 30 seconds segments and appends 
+The following part reads each audio file, breaks it into 30 seconds segments and appends 
 each segment into a list.
 '''
 audio_files = [f for f in listdir(path) if isfile(join(path, f))]
@@ -78,6 +77,5 @@ for segment in segments[0:]:
 #stops the stream  
 stream.stop_stream()  
 stream.close()  
-
 #close PyAudio  
 p.terminate()  
