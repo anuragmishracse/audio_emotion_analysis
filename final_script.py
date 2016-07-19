@@ -1,4 +1,12 @@
 '''
+<Execution script>
+This script is the main script that actually returns the analysed emotions present in a set of audio samples.
+All the files to be analysed are kept in a folder named 'test_calls'.
+The classifer is loaded/trained, each call is analysed and three things are evaluated for each call:
+1. Overall call result
+2. Transition from first half to second half
+3. Emotions in each 20 seconds segments of the call.
+Finally, all the results are entered into a csv file for further analysis/visualization.
 '''
 from __future__ import division
 import emotion_analysis
@@ -15,6 +23,7 @@ emo = emotion_analysis.EmotionAnalysis()
 csvfile = open('call_analysis.csv', 'wb')
 writer = csv.writer(csvfile, delimiter=',')
 
+#Either load a pre-trained existing classifier or train a new classifier.
 if(os.path.exists('my_dumped_classifier.pkl')):
 	print "Loading existing classifier..."
 	with open('my_dumped_classifier.pkl', 'rb') as fid:
@@ -34,6 +43,7 @@ else:
 row = ['Name', 'Length of call', 'Overall call result', 'Transition: First half', 'Transition: Second half']
 writer.writerow(row)
 
+#Read each audio call present in the folde, perform the analysis and store in the csv file. 
 path = 'test_calls'
 audio_files = [f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f))]
 counter = 0
