@@ -1,5 +1,5 @@
 *.wav
 *.pyc
-.ipynb_checkpoints\
+.ipynb_checkpoints
 *.mp3
 *.csv

@@ -17,10 +17,14 @@ if(os.path.exists('my_dumped_classifier.pkl')):
 	print "Loading existing classifier..."
 	with open('my_dumped_classifier.pkl', 'rb') as fid:
 	    clf = cPickle.load(fid)
+	print "Loaded..."
 else:
 	print "Building a classifier..."
+	print "Loading data..."
 	inp, lab = emo.prepare_dataset('data')
+	print "Training on the data..."
 	clf = emo.train_classifier([inp, lab])
+	print "\nClassifier score: "+str(clf.oob_score_)+"\n"
 	# save the classifier
 	with open('my_dumped_classifier.pkl', 'wb') as fid:
 	    cPickle.dump(clf, fid)    
@@ -29,7 +33,7 @@ row = ['Name', 'Length of call in seconds', 'Overall call result', 'Transition: 
 writer.writerow(row)
 
 path = 'test_calls'
-audio_files = [f for f in listdir(path) if isfile(join(path, f))]
+audio_files = [f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f))]
 counter = 0
 for audio_file in audio_files:
 	row = []

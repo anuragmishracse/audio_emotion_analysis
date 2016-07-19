@@ -30,7 +30,7 @@ class EmotionAnalysis():
 				audio_features = self.extractor.extract_features(join(path, audio_file))
 				i+=1
 				if i%100==0:
-					print "Read audio file '"+join(path, audio_file)+"', count: "+str(i)
+					print "Loaded audio files, count: "+str(i)
 			except:
 				print "Skipping audio file '"+join(path, audio_file)+"'"
 				continue
@@ -65,7 +65,7 @@ class EmotionAnalysis():
 					audio_features = self.extractor.extract_features_per_frame(join(path, audio_file))
 					i+=1
 					if i%100==0:
-						print "Read audio file '"+join(path, audio_file)+"', count: "+str(i)
+						print "Loaded audio files, count: "+str(i)
 				except:
 					print "Skipping audio file '"+join(path, audio_file)+"'"
 					continue
