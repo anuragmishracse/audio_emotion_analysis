@@ -95,7 +95,7 @@ class EmotionAnalysis():
 		dataset = zip(inp, lab)
 		shuffle(dataset)
 		inp, lab = zip(*dataset)	
-		clf = RandomForestClassifier(n_estimators=10)
+		clf = RandomForestClassifier(n_estimators=1000, max_depth = 100000, n_jobs = -1, oob_score = True, min_samples_split = 10)
 		clf.fit(inp, lab)
 		return clf
 

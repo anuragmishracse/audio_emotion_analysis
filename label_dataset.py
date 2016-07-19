@@ -27,7 +27,7 @@ print "\n\n"
 print "Total files: "+str(c_total)
 print "Read files: "+str(c_read)
 print "Skipped files:"+str(c_skipped) 
-print len(segments)      
+print "Total 20 sec chunks: "+str(len(segments))
 
 FORMAT = pyaudio.paInt16
 CHANNELS = 1
