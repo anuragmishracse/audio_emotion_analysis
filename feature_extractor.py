@@ -3,12 +3,12 @@ The purpose of this script is to extract the features from an audio file and ret
 The features includes both the 13 - MFCC(Mel Frequency Spectral Coefficients) and 26 - Log Filterbank Energy features.
 An audio file is divided into multiple frames of 25 ms each and the 13 + 26 = 39 features are evaluated for each frame.
 For each feature, aggregation is done on all frames and six things are evaluated which are:
-	1. mean
-	2. variance
-	3. maximum
-	4. minimum
-	5. mean of first half frames
-	6. mean of second half frames
+ 1. mean
+ 2. variance
+ 3. maximum
+ 4. minimum
+ 5. mean of first half frames
+ 6. mean of second half frames
 Total number of features returned for an audio input(of any size) are = 6 * (13 + 26) = 234
 '''
 import numpy as np
@@ -18,7 +18,9 @@ from features import mfcc, logfbank
 class FeatureExtractor():
 
 	def extract_frames_features(self, audio_signal):
-		''' Extracts the 39 features per frame and returns features for all frames in a list.'''
+		''' 
+		Extracts the 39 features per frame and returns features for all frames in a list.
+		'''
 		(rate, sig) = audio_signal
 		mfcc_features = mfcc(sig, rate)
 		fbank_features = logfbank(sig, rate)
@@ -48,8 +50,10 @@ class FeatureExtractor():
 		return final_features
 
 	def extract_features_per_frame(self, audio_file=None, audio_signal = None):
-		'''Computes and returns just the 39 features for all frames for any audio file.
-		--For future use--'''
+		'''
+		Computes and returns just the 39 features for all frames for any audio file.
+		--For future use--
+		'''
 		if audio_file is not None:
 			audio_signal = wav.read(audio_file)
 			frames_features = self.extract_frames_features(audio_signal)	
