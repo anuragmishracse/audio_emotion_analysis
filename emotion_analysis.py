@@ -63,36 +63,36 @@ class EmotionAnalysis():
 		return [dataset_inputs, dataset_labels]
 
 	def prepare_dataset_per_frame(self, path):
-			'''
-			-- For future use --
-			This method prepares the dataset 'per frame' from the audio files present in the provided path.
+		'''
+		-- For future use --
+		This method prepares the dataset 'per frame' from the audio files present in the provided path.
 
-			Parameter description -
-			path	:	Path where all the input audio files are stored
+		Parameter description -
+		path	:	Path where all the input audio files are stored
 
-			Returns -	[dataset_inputs, dataset_labels]
-			dataset_inputs	:	A list of feature vectors, where each vector is for one frame in a complete audio file.
-			dataset_labels	:	A list of labels, where each label is for corresponding feature vector in dataset_inputs.
-			'''
-			from random import shuffle
-			i=0
-			dataset_inputs = []
-			dataset_labels = []
-			audio_files = [f for f in listdir(path) if isfile(join(path, f))]
-			shuffle(audio_files)
-			for audio_file in audio_files:
-				try:
-					audio_features = self.extractor.extract_features_per_frame(join(path, audio_file))
-					i+=1
-					if i%100==0:
-						print "Loaded audio files, count: "+str(i)
-				except:
-					print "Skipping audio file '"+join(path, audio_file)+"'"
-					continue
-				audio_label = audio_file.split('_')[0]	
-				dataset_inputs.extend(audio_features)
-				dataset_labels.extend([audio_label for _ in range(len(audio_features))])
-			return [dataset_inputs, dataset_labels]
+		Returns -	[dataset_inputs, dataset_labels]
+		dataset_inputs	:	A list of feature vectors, where each vector is for one frame in a complete audio file.
+		dataset_labels	:	A list of labels, where each label is for corresponding feature vector in dataset_inputs.
+		'''
+		from random import shuffle
+		i=0
+		dataset_inputs = []
+		dataset_labels = []
+		audio_files = [f for f in listdir(path) if isfile(join(path, f))]
+		shuffle(audio_files)
+		for audio_file in audio_files:
+			try:
+				audio_features = self.extractor.extract_features_per_frame(join(path, audio_file))
+				i+=1
+				if i%100==0:
+					print "Loaded audio files, count: "+str(i)
+			except:
+				print "Skipping audio file '"+join(path, audio_file)+"'"
+				continue
+			audio_label = audio_file.split('_')[0]	
+			dataset_inputs.extend(audio_features)
+			dataset_labels.extend([audio_label for _ in range(len(audio_features))])
+		return [dataset_inputs, dataset_labels]
 
 
 	def train_classifier(self, dataset):
