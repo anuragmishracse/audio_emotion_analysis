@@ -9,8 +9,7 @@ The classifer is loaded/trained, each call is analysed and three things are eval
 Finally, all the results are entered into a csv file for further analysis/visualization.
 '''
 from __future__ import division
-import emotion_analysis
-import feature_extractor
+from audio_emotion_analysis import emotion_analysis
 import cPickle
 import csv
 import os
