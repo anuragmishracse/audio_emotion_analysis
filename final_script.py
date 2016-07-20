@@ -51,20 +51,23 @@ for audio_file in audio_files:
 	row = []
 	counter += 1
 	print "Processing file: "+str(counter)
-	rate_sig, sig = wav.read(os.path.join(path, audio_file))
-	complete_call_result = emo.evaluate(clf, audio_signal = (rate_sig, sig))
-	first_half_result = emo.evaluate(clf, audio_signal = (rate_sig, sig[:int(len(sig)/2)]))
-	second_half_result = emo.evaluate(clf, audio_signal = (rate_sig, sig[int(len(sig)/2):]))
-	segment_result = []
-	for i in range(int(math.ceil(len(sig)/(rate_sig*20)))):
-	    segment_result.append(emo.evaluate(clf, audio_signal = (rate_sig, sig[i*rate_sig*20:i*rate_sig*20+rate_sig*20])))
-	row.append(audio_file)
-	row.append(str(int((len(sig)/rate_sig)/60))+" min "+str(int((len(sig)/rate_sig)%60))+" sec")
-	row.append(complete_call_result)
-	row.append(first_half_result)
-	row.append(second_half_result)
-	row.extend(segment_result)
-	writer.writerow(row)
-	csvfile.flush()
+	try:
+		rate_sig, sig = wav.read(os.path.join(path, audio_file))
+		complete_call_result = emo.evaluate(clf, audio_signal = (rate_sig, sig))
+		first_half_result = emo.evaluate(clf, audio_signal = (rate_sig, sig[:int(len(sig)/2)]))
+		second_half_result = emo.evaluate(clf, audio_signal = (rate_sig, sig[int(len(sig)/2):]))
+		segment_result = []
+		for i in range(int(math.ceil(len(sig)/(rate_sig*20)))):
+		    segment_result.append(emo.evaluate(clf, audio_signal = (rate_sig, sig[i*rate_sig*20:i*rate_sig*20+rate_sig*20])))
+		row.append(audio_file)
+		row.append(str(int((len(sig)/rate_sig)/60))+" min "+str(int((len(sig)/rate_sig)%60))+" sec")
+		row.append(complete_call_result)
+		row.append(first_half_result)
+		row.append(second_half_result)
+		row.extend(segment_result)
+		writer.writerow(row)
+		csvfile.flush()
+	except:
+		print "Skipping file: "+str(counter)+", name: "+audio_file
 csvfile.close()
 print "Completed..."

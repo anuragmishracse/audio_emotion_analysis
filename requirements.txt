@@ -1,0 +1,2 @@
+pyaudio
+python_speech_features
