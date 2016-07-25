@@ -25,6 +25,17 @@ Once the requirements are installed, just type
 	- Continue until all the chunks are labelled. 
 	- A new dataset will be prepared in a new folder named `data`, with each audio file of the name in the format `<label>_<counter>.wav`.
 
+## Scripts description:
+### feature_extractor.py
+Extracts the features from any audio file or signal and returns a feature vector.
+
+### emotion_analysis.py
+This is the backbone of the project. It contains modules that 
+- extracts features using the `feature_extractor.py`
+- trains the model
+- tests the model
+- evaluates the model on new dataset
+
 ##Evaluating a new dataset:
 - Put all the new audio files in a folder named `test_calls`, or any other folder and update the name of the folder in `main_script.py`.
 - Execute the script `main_script.py` or type
