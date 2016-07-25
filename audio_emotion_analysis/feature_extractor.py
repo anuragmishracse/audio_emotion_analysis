@@ -13,7 +13,7 @@ Total number of features returned for an audio input(of any size) are = 6 * (13 
 '''
 import numpy as np
 import scipy.io.wavfile as wav
-from features import mfcc, logfbank
+from python_speech_features import mfcc, logfbank
 
 class FeatureExtractor():
 
