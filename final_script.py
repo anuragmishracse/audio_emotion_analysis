@@ -31,7 +31,7 @@ if(os.path.exists('my_dumped_classifier.pkl')):
 else:
 	print "Building a classifier..."
 	print "Loading data..."
-	inp, lab = emo.prepare_dataset('data')
+	inp, lab = emo.prepare_dataset(os.path.join(os.path.dirname(os.path.abspath(__file__)),'data'))
 	print "Training on the data..."
 	clf = emo.train_classifier([inp, lab])
 	print "\nClassifier score: "+str(clf.oob_score_)+"\n"

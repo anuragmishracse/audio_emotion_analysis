@@ -23,7 +23,7 @@ class EmotionAnalysis():
 		Parameter description -
 		inp 	:	A list of feature vector
 		label 	:	A list of labels for each feature vector
-		name  	:	csv file-name/path 
+		name  	:	csv file-name 
 		'''
 		csvfile = open(name, 'wb')
 		writer = csv.writer(csvfile, delimiter=',')
