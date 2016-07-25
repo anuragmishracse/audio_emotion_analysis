@@ -5,8 +5,8 @@ The objective of this project is to predict the emotion present in any audio fil
 
 ##Requirements:
 1. Anaconda - This installs python along with most popular python libraries including sklearn. If not already installed, install it from https://www.continuum.io/downloads . 
-2. python_speech_features
-3. pyaudio
+2. python_speech_features - Python library for feature extraction.
+3. pyaudio - Python library for recording and playing of audio samples. 
 
 The requirements 2 and 3 can be installed by executing the following using shell/cmd, in the cloned repository directory:
 ```
