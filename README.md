@@ -8,14 +8,14 @@ The objective of this project is to predict the emotion present in any audio fil
 2. python_speech_features
 3. pyaudio
 
-The requirements 2 and 3 can be installed by typing:
+The requirements 2 and 3 can be installed by executing the following using shell/cmd, in the cloned repository directory:
 ```
 pip install -r requirements.txt
 ```
 
 ##Installation:
 
-Once the requirements are installed, just type
+Once the requirements are installed, just type the following in shell/cmd
 `python setup.py install`
 
 ##Preparing dataset:
