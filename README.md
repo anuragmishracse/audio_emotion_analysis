@@ -6,7 +6,7 @@ The objective of this project is to predict the emotion present in any audio fil
 - python_speech_features
 - pyaudio
 
-The requirements 2 and 3 can be installed by typing::
+The requirements 2 and 3 can be installed by typing: :
 	pip install -r requirements.txt
 
 
