@@ -1,6 +1,8 @@
 # audio_emotion_analysis
 The objective of this project is to predict the emotion present in any audio file/signal.
 
+> Clone the project and move to the directory in shell/command line.
+
 ##Requirements:
 1. Anaconda - This installs python along with most popular python libraries including sklearn. If not already installed, install it from https://www.continuum.io/downloads . 
 2. python_speech_features
