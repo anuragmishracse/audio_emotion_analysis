@@ -40,7 +40,7 @@ print "\n\n"
 print "Total files: "+str(c_total)
 print "Read files: "+str(c_read)
 print "Skipped files:"+str(c_skipped) 
-print "Total 20 sec chunks: "+str(len(segments))
+print "Total 30 sec chunks: "+str(len(segments))
 print "-"*50
 
 '''
@@ -63,8 +63,8 @@ stream = p.open(format = FORMAT,
                 rate = rate_sig,  
                 output = True, frames_per_buffer=rate_sig)  
 #writes into the stream
-count_label = 0   
-for segment in segments[0:]:
+count_label = 519   
+for segment in segments[520:]:
     count_label+=1
     stream.write(segment[0:int(len(segment)/2)])
     stream.write(segment[int(len(segment)/2):])
