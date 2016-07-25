@@ -17,6 +17,7 @@ Once the requirements are installed, just type
 `python setup.py install`
 
 ##Preparing dataset:
+- Put all the unlabelled audio files in a folder named `calls`, or any other folder and update the name of folder in `label_dataset.py`. 
 
 
 
