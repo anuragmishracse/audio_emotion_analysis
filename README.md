@@ -44,7 +44,7 @@ This is the backbone of the project. It contains modules that
 
 ##Evaluating a new dataset:
 - Put all the new audio files in a folder named `test_calls`, or any other folder and update the name of the folder in `main_script.py`.
-- Execute the script `main_script.py` or type
+- Execute the script `main_script.py` by typing the following in shell/cmd, in the containing directory:
 ```
 python main_script.py
 ```
