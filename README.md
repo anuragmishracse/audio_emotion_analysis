@@ -26,8 +26,10 @@ Once the requirements are installed, just type the following in shell/cmd
 	- Enter `1` for `negative`, `2` for `neutral` and `3` for `positive`.
 	- Continue until all the chunks are labelled. 
 	- A new dataset will be prepared in a new folder named `data`, with each audio file of the name in the format `<label>_<counter>.wav`. For example:
+	```
 	> positive_1.wav
 	> negative_2.wav
+	```
 
 ## Scripts description:
 ### feature_extractor.py
