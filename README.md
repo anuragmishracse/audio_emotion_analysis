@@ -42,8 +42,8 @@ This is the backbone of the project. It contains modules that
 ```
 python main_script.py
 ```
-###Results
 - The script will load an existing model or train a new model on the dataset prepared, extract features for each of the new calls, feed it to the trained model. 
+###Results
 - For each file, following three things are evaluated:
 	- Overall emotion
 	- Emotion transition from first half to second half
