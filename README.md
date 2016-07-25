@@ -7,7 +7,9 @@ The objective of this project is to predict the emotion present in any audio fil
 3. pyaudio
 
 The requirements 2 and 3 can be installed by typing:
-`pip install -r requirements.txt`
+```
+pip install -r requirements.txt
+```
 
 ##Installation:
 
