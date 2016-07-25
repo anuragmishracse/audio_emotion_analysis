@@ -23,7 +23,23 @@ Once the requirements are installed, just type
 	- It will play each chunk and then ask for a label (positive/neutral/negative).
 	- Enter `1` for `negative`, `2` for `neutral` and `3` for `positive`.
 	- Continue until all the chunks are labelled. 
-	- A new dataset will be prepared in a new folder named `data`, with each audio file of the name in the format `<label>_<counter>.wav`
+	- A new dataset will be prepared in a new folder named `data`, with each audio file of the name in the format `<label>_<counter>.wav`.
+
+##Evaluating a new dataset:
+- Put all the new audio files in a folder named `test_calls`, or any other folder and update the name of the folder in `main_script.py`.
+- Execute the script `main_script.py` or type
+```
+python main_script.py
+```
+- The script will load an existing model or train a new model on the dataset prepared, extract features for each of the new calls, feed it to the trained model. 
+- For each file, following three things are evaluated:
+	- Overall emotion
+	- Emotion transition from first half to second half
+	- Emotion present in each 20 sec chunk of the file
+- These results for each audio file are written to a `.csv` file, on which further analysis can be done. 
+
+
+
 
 
 
